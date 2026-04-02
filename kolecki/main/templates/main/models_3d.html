@@ -1,0 +1,47 @@
+<form method="post">
+  {% csrf_token %}
+
+  <label for="product_type">Тип изделия</label>
+  <select name="product_type" id="product_type">
+    <option value="ring">Кольцо</option>
+    <option value="bracelet">Браслет</option>
+    <option value="earrings">Серьги</option>
+  </select>
+
+  <label for="model_id">Модель</label>
+  <select name="model_id" id="model_id">
+    <option value="">Выберите модель</option>
+    {% for m in builder_models %}
+      <option value="{{ m.id }}" data-type="{{ m.product_type }}" data-url="{{ m.glb_file.url|default:'' }}">
+        {{ m.get_product_type_display }} — {{ m.title }}
+      </option>
+    {% endfor %}
+  </select>
+
+  <label for="material">Материал</label>
+  <select name="material" id="material">
+    <option value="silver">Серебро</option>
+    <option value="melchior">Мельхиор</option>
+  </select>
+
+  <label for="stone">Камень</label>
+  <select name="stone" id="stone">
+    <option value="diamond">Бриллиант</option>
+    <option value="emerald">Изумруд</option>
+    <option value="ruby">Рубин</option>
+    <option value="sapphire">Сапфир</option>
+  </select>
+
+  <div id="engraving-block">
+    <label for="engraving">Гравировка</label>
+    <input type="text" name="engraving" id="engraving" placeholder="Текст гравировки">
+  </div>
+
+  <label for="customer_name">Ваше имя</label>
+  <input type="text" name="customer_name" id="customer_name" placeholder="Введите имя" required>
+
+  <label for="phone">Ваш номер телефона</label>
+  <input type="text" name="phone" id="phone" placeholder="Введите номер телефона" required>
+
+  <button type="submit" class="btn btn-primary full-width">Оформить заказ</button>
+</form>

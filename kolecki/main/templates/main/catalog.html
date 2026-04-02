@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/catalog.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-header">
+  <h1>Каталог</h1>
+  <p>Авторские украшения в единичных, не видоизменяемых экземплярах.</p>
+</section>
+
+{% if items %}
+  <section class="catalog-grid">
+    {% for product in items %}
+      <article class="product-card">
+        <div class="product-image">
+          {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          {% else %}
+            <div class="image-placeholder">Нет изображения</div>
+          {% endif %}
+        </div>
+
+        <div class="product-body">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description|truncatechars:120 }}</p>
+          <div class="product-footer">
+            <span class="price">{{ product.price }} ₽</span>
+            <a class="btn btn-primary" href="{% url 'catalog_order' product.id %}">Заказать</a>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </section>
+{% else %}
+  <div class="empty-box">
+    В каталоге пока нет украшений. Добавь товары через админку.
+  </div>
+{% endif %}
+{% endblock %}

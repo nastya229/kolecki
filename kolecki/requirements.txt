@@ -1,0 +1,7 @@
+Django==5.0.2
+python-dotenv
+requests
+Pillow
+gunicorn
+whitenoise
+psycopg[binary]

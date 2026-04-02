@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-box">
+    <div class="hero-badge">Авторские украшения · 3D конструктор · Индивидуальный подход</div>
+
+    <h1>Ювелирные изделия нового поколения</h1>
+
+    <p>
+      Авторские украшения и отдельный 3D-конструктор, где можно собрать своё изделие:
+      выбрать металл, камни и гравировку.
+    </p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{% url 'catalog' %}">Каталог</a>
+      <a class="btn btn-secondary" href="{% url 'models_3d' %}">3D Модели</a>
+      <a class="btn btn-secondary" href="{% url 'about' %}">О нас</a>
+    </div>
+  </div>
+</section>
+
+<section class="cards-grid">
+  <div class="info-card">
+    <h3>Каталог</h3>
+    <p>Готовые авторские украшения в единичных экземплярах.</p>
+    <a href="{% url 'catalog' %}">Перейти</a>
+  </div>
+
+  <div class="info-card">
+    <h3>3D Конструктор</h3>
+    <p>Кольца, браслеты и серьги с выбором материала, камней и гравировки.</p>
+    <a href="{% url 'models_3d' %}">Перейти</a>
+  </div>
+
+  <div class="info-card">
+    <h3>О нас</h3>
+    <p>Инди-ювелир с небольшой студией ювелирных украшений.</p>
+    <a href="{% url 'about' %}">Подробнее</a>
+  </div>
+</section>
+{% endblock %}

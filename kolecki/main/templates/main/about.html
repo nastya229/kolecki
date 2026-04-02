@@ -1,0 +1,44 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}О нас{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="about-page">
+  <div class="about-card">
+    <h1>О нас</h1>
+    <p>
+      Мы — <b>инди-ювелир с небольшой студией ювелирных украшений</b>.
+      Создаём украшения вручную, соединяя ремесленный подход и современные технологии.
+    </p>
+    <p>
+      На сайте есть каталог готовых авторских работ и отдельный раздел 3D-моделей,
+      где можно собрать своё украшение самостоятельно.
+    </p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-block">
+      <h3>Материалы</h3>
+      <p>Серебро, мельхиор, камни и индивидуальные детали.</p>
+    </div>
+
+    <div class="about-block">
+      <h3>Как мы работаем</h3>
+      <p>От идеи и эскиза до готового украшения и финальной обработки.</p>
+    </div>
+
+    <div class="about-block">
+      <h3>Telegram</h3>
+      <p>
+        Следить за работами и новостями можно здесь:
+        <a href="https://t.me/eternitycopper" target="_blank" rel="noopener">@eternitycopper</a>
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

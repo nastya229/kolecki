@@ -1,0 +1,15 @@
+{% extends "main/base.html" %}
+
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block content %}
+<div class="success-box">
+  <h1>Заказ создан</h1>
+  <p>Спасибо, <b>{{ customer_name }}</b>.</p>
+  <p>Ваш заказ из 3D конструктора успешно отправлен.</p>
+  <p>Мы свяжемся с вами в ближайшее время.</p>
+  <p><b>ID заказа:</b> {{ order.id }}</p>
+  <p><b>Модель:</b> {{ selected_model.title|default:"Не выбрана" }}</p>
+  <a class="btn btn-primary" href="{% url 'models_3d' %}">Создать ещё</a>
+</div>
+{% endblock %}

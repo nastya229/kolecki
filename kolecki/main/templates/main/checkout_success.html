@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block title %}Заказ оформлен{% endblock %}
+
+{% block content %}
+<div class="success-box">
+  <h1>Заказ оформлен</h1>
+  <p>Спасибо, <b>{{ customer_name }}</b>.</p>
+  <p>Ваш заказ на украшение <b>{{ jewelry.name }}</b> принят.</p>
+  <p>Мы свяжемся с вами в ближайшее время.</p>
+  <p><b>ID заказа:</b> {{ order.id }}</p>
+  <a class="btn btn-primary" href="{% url 'catalog' %}">Вернуться в каталог</a>
+</div>
+{% endblock %}
