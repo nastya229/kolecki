@@ -1,53 +1,200 @@
+.builder-page {
+    padding: 24px 0 40px;
+}
+
+.builder-header {
+    max-width: 900px;
+    margin: 0 auto 24px;
+    text-align: center;
+}
+
+.builder-header h1 {
+    margin: 0 0 12px;
+    font-size: 38px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.builder-header p {
+    margin: 0;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
 .builder-layout {
-  display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
-  gap: 18px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.9fr;
+    gap: 24px;
+    align-items: stretch;
 }
 
-.viewer-box,
-.builder-form-box {
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+.viewer-card,
+.form-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    overflow: hidden;
 }
 
-#viewer {
-  min-height: 520px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.18);
+.viewer-placeholder {
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+    background:
+        radial-gradient(circle at top left, rgba(212,175,55,0.10), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.06), transparent 25%),
+        linear-gradient(135deg, rgba(15,23,42,0.95), rgba(23,37,84,0.90));
 }
 
-.builder-form-box form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.viewer-placeholder-inner {
+    max-width: 420px;
 }
 
-.builder-form-box label {
-  font-weight: 700;
-  margin-top: 6px;
+.viewer-icon {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    color: #f7e7a1;
+    background: rgba(212,175,55,0.12);
+    border: 1px solid rgba(212,175,55,0.25);
 }
 
-.builder-form-box select,
-.builder-form-box input {
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
-  color: #ffffff;
+.viewer-placeholder-inner h2 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    color: #fff;
 }
 
-.full-width {
-  width: 100%;
-  margin-top: 12px;
+.viewer-placeholder-inner p {
+    margin: 0;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.form-card {
+    padding: 28px;
+}
+
+.builder-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    padding: 14px;
+    resize: vertical;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255,255,255,0.45);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: rgba(212,175,55,0.75);
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.12);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 2px;
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 6px;
+    padding: 15px 18px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #d4af37, #f7e7a1);
+    color: #111827;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(212,175,55,0.22);
+}
+
+.form-note {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.72);
+}
+
+#engraving-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 @media (max-width: 980px) {
-  .builder-layout {
-    grid-template-columns: 1fr;
-  }
+    .builder-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .viewer-placeholder {
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 640px) {
+    .builder-header h1 {
+        font-size: 30px;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
 }

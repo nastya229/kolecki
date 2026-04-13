@@ -1,32 +1,40 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Jewelry Store 3D{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Jewelry Store 3D{% endblock %}</title>
 
-  <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
-  {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="{% url 'home' %}">Jewelry Store 3D</a>
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="logo" href="{% url 'home' %}">
+                    <span class="logo-mark"></span>
+                    <span class="logo-text">
+                        <strong>Jewelry Store 3D</strong>
+                        <small>Каталог + 3D конструктор</small>
+                    </span>
+                </a>
 
-      <nav class="nav">
-        <a href="{% url 'home' %}">Главная</a>
-        <a href="{% url 'catalog' %}">Каталог</a>
-        <a href="{% url 'models_3d' %}">3D Модели</a>
-        <a href="{% url 'about' %}">О нас</a>
-        <a href="https://t.me/eternitycopper" target="_blank" rel="noopener">Telegram</a>
-        <a href="/admin/">Админка</a>
-      </nav>
+                <nav class="nav">
+                    <a href="{% url 'home' %}">Главная</a>
+                    <a href="{% url 'about' %}">О нас</a>
+                    <a href="{% url 'catalog' %}">Каталог</a>
+                    <a href="{% url 'models_3d' %}">3D Модели</a>
+                    <a href="https://t.me/eternitycopper" target="_blank" rel="noopener noreferrer">Telegram</a>
+                    <a href="/admin/">Админка</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="container page-content">
+            {% block content %}{% endblock %}
+        </main>
     </div>
-  </header>
-
-  <main class="container page-content">
-    {% block content %}{% endblock %}
-  </main>
 </body>
 </html>

@@ -1,11 +1,17 @@
 from django.db import models
+import os
+import uuid
 
+
+def upload_to(instance, filename):
+    ext = os.path.splitext(filename)[1]
+    return f'jewelry/{uuid.uuid4().hex}{ext}'
 
 class Jewelry(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.PositiveIntegerField()
-    image = models.ImageField(upload_to="jewelry/", blank=True, null=True)
+    image = models.ImageField(upload_to=upload_to)
 
     def __str__(self):
         return self.name

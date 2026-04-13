@@ -1,47 +1,157 @@
-<form method="post">
-  {% csrf_token %}
+{% extends "main/base.html" %}
+{% load static %}
 
-  <label for="product_type">Тип изделия</label>
-  <select name="product_type" id="product_type">
-    <option value="ring">Кольцо</option>
-    <option value="bracelet">Браслет</option>
-    <option value="earrings">Серьги</option>
-  </select>
+{% block title %}3D Модели{% endblock %}
 
-  <label for="model_id">Модель</label>
-  <select name="model_id" id="model_id">
-    <option value="">Выберите модель</option>
-    {% for m in builder_models %}
-      <option value="{{ m.id }}" data-type="{{ m.product_type }}" data-url="{{ m.glb_file.url|default:'' }}">
-        {{ m.get_product_type_display }} — {{ m.title }}
-      </option>
-    {% endfor %}
-  </select>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'main/css/builder.css' %}">
+{% endblock %}
 
-  <label for="material">Материал</label>
-  <select name="material" id="material">
-    <option value="silver">Серебро</option>
-    <option value="melchior">Мельхиор</option>
-  </select>
+{% block content %}
+<section class="builder-page">
+    <div class="builder-header">
+        <h1>3D Конструктор украшений</h1>
+        <p>
+            Выберите тип изделия и параметры заказа. Полноценный 3D просмотр
+            появится позже, а сейчас можно оставить заявку на изготовление.
+        </p>
+    </div>
 
-  <label for="stone">Камень</label>
-  <select name="stone" id="stone">
-    <option value="diamond">Бриллиант</option>
-    <option value="emerald">Изумруд</option>
-    <option value="ruby">Рубин</option>
-    <option value="sapphire">Сапфир</option>
-  </select>
+    <div class="builder-layout">
+        <div class="viewer-card">
+            <div class="viewer-placeholder">
+                <div class="viewer-placeholder-inner">
+                    <div class="viewer-icon">◌</div>
+                    <h2>Скоро тут будет 3D</h2>
+                    <p>Здесь появится интерактивный просмотр модели украшения.</p>
+                </div>
+            </div>
+        </div>
 
-  <div id="engraving-block">
-    <label for="engraving">Гравировка</label>
-    <input type="text" name="engraving" id="engraving" placeholder="Текст гравировки">
-  </div>
+        <div class="form-card">
+            <form method="post" class="builder-form">
+                {% csrf_token %}
 
-  <label for="customer_name">Ваше имя</label>
-  <input type="text" name="customer_name" id="customer_name" placeholder="Введите имя" required>
+                <div class="form-group">
+                    <label for="product_type">Тип изделия</label>
+                    <select name="product_type" id="product_type" required>
+                        <option value="ring">Кольцо</option>
+                        <option value="bracelet">Браслет</option>
+                        <option value="earrings">Серьги</option>
+                    </select>
+                </div>
 
-  <label for="phone">Ваш номер телефона</label>
-  <input type="text" name="phone" id="phone" placeholder="Введите номер телефона" required>
+                <div class="form-group">
+                    <label for="model_id">Модель</label>
+                    <select name="model_id" id="model_id">
+                        <option value="">Выберите модель</option>
+                        {% for m in builder_models %}
+                            <option value="{{ m.id }}" data-type="{{ m.product_type }}">
+                                {{ m.get_product_type_display }} — {{ m.title }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
 
-  <button type="submit" class="btn btn-primary full-width">Оформить заказ</button>
-</form>
+                <div class="form-group">
+                    <label for="material">Материал</label>
+                    <select name="material" id="material" required>
+                        <option value="silver">Серебро</option>
+                        <option value="melchior">Мельхиор</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="stone">Камень</label>
+                    <select name="stone" id="stone">
+                        <option value="diamond">Бриллиант</option>
+                        <option value="emerald">Изумруд</option>
+                        <option value="ruby">Рубин</option>
+                        <option value="sapphire">Сапфир</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="engraving-block">
+                    <label for="engraving">Гравировка</label>
+                    <input
+                        type="text"
+                        name="engraving"
+                        id="engraving"
+                        placeholder="Введите текст гравировки"
+                    >
+                    <small>Гравировка доступна только для колец.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer_name">Ваше имя</label>
+                    <input
+                        type="text"
+                        name="customer_name"
+                        id="customer_name"
+                        placeholder="Введите имя"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Ваш номер телефона</label>
+                    <input
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        placeholder="Введите номер телефона"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="submit-btn">Оформить заказ</button>
+
+                <p class="form-note">
+                    После отправки заявки мы свяжемся с вами для уточнения деталей.
+                </p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const productType = document.getElementById("product_type");
+    const modelSelect = document.getElementById("model_id");
+    const engravingBlock = document.getElementById("engraving-block");
+    const engravingInput = document.getElementById("engraving");
+
+    function toggleEngraving() {
+        if (productType.value === "ring") {
+            engravingBlock.style.display = "flex";
+        } else {
+            engravingBlock.style.display = "none";
+            engravingInput.value = "";
+        }
+    }
+
+    function filterModels() {
+        const selectedType = productType.value;
+        const options = modelSelect.querySelectorAll("option");
+
+        options.forEach(option => {
+            if (!option.value) {
+                option.hidden = false;
+                return;
+            }
+            option.hidden = option.dataset.type !== selectedType;
+        });
+
+        modelSelect.value = "";
+    }
+
+    productType.addEventListener("change", function () {
+        toggleEngraving();
+        filterModels();
+    });
+
+    toggleEngraving();
+    filterModels();
+});
+</script>
+{% endblock %}
