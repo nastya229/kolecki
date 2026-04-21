@@ -1,6 +1,7 @@
 from django.db import models
 import os
 import uuid
+from cloudinary.models import CloudinaryField
 
 
 def upload_to(instance, filename):
@@ -11,7 +12,7 @@ class Jewelry(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.PositiveIntegerField()
-    image = models.ImageField(upload_to=upload_to, blank=True, null=True)
+    image = CloudinaryField('image', blank=True, null=True)
 
     def __str__(self):
         return self.name
