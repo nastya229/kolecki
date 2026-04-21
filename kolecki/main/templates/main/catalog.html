@@ -19,7 +19,7 @@
       <article class="product-card">
         <div class="product-image">
           {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            <img src="{{ product.image_url }}" alt="{{ product.name }}">
           {% else %}
             <div class="image-placeholder">Нет изображения</div>
           {% endif %}

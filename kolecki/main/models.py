@@ -15,6 +15,15 @@ class Jewelry(models.Model):
 
     def __str__(self):
         return self.name
+    
+    @property
+    def image_url(self):
+        try:
+            if self.image and hasattr(self.image, "url"):
+                return self.image.url
+        except Exception:
+            return None
+        return None
 
 
 class CatalogOrder(models.Model):
