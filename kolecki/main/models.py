@@ -11,7 +11,7 @@ class Jewelry(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     price = models.PositiveIntegerField()
-    image = models.ImageField(upload_to=upload_to)
+    image = models.ImageField(upload_to=upload_to, blank=True, null=True)
 
     def __str__(self):
         return self.name
