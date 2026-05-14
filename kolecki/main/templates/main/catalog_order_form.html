@@ -6,7 +6,7 @@
 <div class="success-box">
   <h1>Оформление заказа</h1>
   <p>Украшение: <b>{{ jewelry.name }}</b></p>
-  <p>Оставьте имя и телефон — мы свяжемся с вами.</p>
+  <p>Оставьте имя и телефон или телеграм — мы свяжемся с вами.</p>
 
   <form method="post" style="display:flex; flex-direction:column; gap:12px; margin-top:20px;">
     {% csrf_token %}
@@ -22,7 +22,7 @@
     <input
       type="text"
       name="phone"
-      placeholder="Ваш номер телефона"
+      placeholder="Ваш номер телефона или телеграм"
       required
       style="padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04); color:#fff;"
     >
