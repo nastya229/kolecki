@@ -1,6 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Jewelry, CatalogOrder, BuilderModel, BuilderOrder
-#from bots.telegram_bot import send_telegram
+from bots.telegram_bot import send_telegram
+
+
+def safe_send_telegram(text: str) -> None:
+    try:
+        result = send_telegram(text)
+        print("Telegram result:", result)
+    except Exception as e:
+        print("Telegram error:", e)
 
 
 def home(request):
@@ -38,7 +46,8 @@ def create_catalog_order(request, id):
                 f"<b>Телефон:</b> {phone}\n"
                 f"<b>ID заказа:</b> {order.id}"
             )
-            #send_telegram(text)
+
+            safe_send_telegram(text)
 
             return render(
                 request,
@@ -110,7 +119,8 @@ def models_3d(request):
                 f"<b>Телефон:</b> {phone}\n"
                 f"<b>ID заказа:</b> {order.id}"
             )
-            #send_telegram(text)
+
+            safe_send_telegram(text)
 
             return render(
                 request,
